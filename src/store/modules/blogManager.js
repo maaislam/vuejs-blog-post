@@ -36,6 +36,18 @@ const getters = {
 
 
 const mutations= {
+
+
+    setAllPost:(state, response) => state.allPost = response,
+
+    resetState:(state)=>{
+        state.form.author='';
+        state.form.title = '';
+        state.form.categories = [];
+        state.form.body = '';
+        state.addPostBtn = false;
+    },
+
     newPostForm:(state, payload)=>{
         if (payload){
            
@@ -52,12 +64,7 @@ const mutations= {
         }
   
     },
-    savePost:(state, title)=>{
-
-        state.title = title;
-
-        
-    },
+   
 
     updateCategory (state, category) {
         state.form.categories = category
@@ -65,21 +72,7 @@ const mutations= {
 
     updateField,
 
-
-   
-
-
-
 };
-
-
-
-
-
-
-
-
-
 
 
 const actions = {
@@ -92,24 +85,19 @@ const actions = {
 
         context.commit('discard', payload)
     },
-    getAllPost:( payload)=>{
+    async getAllPost(context, payload){
 
         if (payload){
            
-            axios.get('http://localhost:3000/posts').then(response =>{
- 
-            state.allPost = response.data;
-            
- 
-            });
-            
- 
-         }
+            const response = await axios.get('http://localhost:3000/posts');
+            console.log(response)
+            context.commit('setAllPost', response.data)
+          }
     },
-    submit:(payload)=>{
+    async submit(context, payload){
 
         if (payload){
-            axios({
+             await axios({
                 method: 'post',
                 url: 'http://localhost:3000/posts',
                 data: {
@@ -119,13 +107,14 @@ const actions = {
                   body: state.form.body,
                 }
               });
+              context.commit('resetState')
         }
     },
 
+   
   
     
 };
-
 
 
 export default {
@@ -134,3 +123,4 @@ export default {
     mutations,
     actions
 }
+
