@@ -1,25 +1,31 @@
 <template>
   <sui-dropdown
+    @click="check"
     fluid
     multiple
+    allowAdditions
+    
     :options="options"
     placeholder="Category"
     selection
-    v-model="categories"
+    v-model="categories">
     
-  />
+    </sui-dropdown>
 </template>
 
 <script>
 
-import { mapFields } from 'vuex-map-fields';
+import { mapFields  } from 'vuex-map-fields';
+import { mapActions} from 'vuex';
 
 export default {
   name: 'CategorySel',
   data() {
     return {
+      
       selected:[],
       options: [
+        { key: 'Add New', text: 'Add New', value: 'Add New'},
         { key: 'science', text: 'science', value: 'science' },
         { key: 'programming', text: 'programming', value: 'programming' },
         { key: 'lifestyle', text: 'lifestyle', value: 'lifestyle' },
@@ -32,6 +38,9 @@ export default {
 
      computed:{
 
+
+    
+
     ...mapFields([
       'form.categories',
       
@@ -40,12 +49,12 @@ export default {
 
      
     },
-      methods:{
-
-         
-
-      }
-  
+    methods:{
+            
+    ...mapActions(['check']),
+           
+           
+    } 
 
 
 

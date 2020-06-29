@@ -12,13 +12,20 @@ const state = {
         body:'',
         categories:[]
 
-    }
+    },
+    categoryModal:false,
+    newCategory:'',
+    indexOfNewCat:null
     
 };
 
 
 
 const getters = {
+
+    addCategory:(state)=>{
+        return state.categoryModal;
+    },
 
     addPostForm:(state)=>{
      
@@ -52,6 +59,7 @@ const mutations= {
         if (payload){
            
            state.addPostBtn = true;
+
            
         }
   
@@ -66,8 +74,41 @@ const mutations= {
     },
    
 
-    updateCategory (state, category) {
-        state.form.categories = category
+    check:( payload) => {
+        // if dropdown is clicked start checking if user pressed "Add New" button
+        if(payload){
+            //if "Add New" is selected remove it and set categoryModal state to true 
+            const test = state.form.categories.includes("Add New");
+            if (test){
+                state.indexOfNewCat = state.form.categories.indexOf("Add New");
+                    if (state.indexOfNewCat > -1) {
+                    state.form.categories.splice(state.indexOfNewCat,1);
+                    state.categoryModal = true;
+}
+            }
+        }
+
+    },
+    closeCatModal:(payload)=>{
+        if(payload){
+            
+            state.categoryModal = false;
+        }
+        
+    },
+
+
+    addCat:(state, payload)=>{
+
+        if (payload){
+            
+        state.form.categories.splice(state.indexOfNewCat,0, state.newCategory)
+        console.log(state.form.categories)
+        state.categoryModal = false;
+        state.newCategory = '';
+        }
+       
+        
     },
 
     updateField,
@@ -80,6 +121,14 @@ const actions = {
     newPostForm:(context, payload)=>{
 
         context.commit('newPostForm', payload)
+    },
+    closeCatModal:(context, payload)=>{
+
+        context.commit('closeCatModal', payload)
+    },
+    addCat:(context, payload)=>{
+
+        context.commit('addCat', payload)
     },
     discard:(context, payload)=>{
 
@@ -111,6 +160,10 @@ const actions = {
         }
     },
 
+    check:(context, payload)=>{
+
+        context.commit('check', payload)
+    }
    
   
     

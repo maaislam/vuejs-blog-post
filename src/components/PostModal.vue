@@ -20,9 +20,9 @@
                     placeholder="Post Title">
                 </div>
               
-                <div class="field">
+                <div class="field" >
                     <label >Category</label>
-                    <CategorySel/>
+                    <CategorySel />
                 </div>
                 <div class="field">
                     <label>Post Body</label>
@@ -51,7 +51,7 @@
     import {mapGetters, mapActions} from 'vuex';
     
     export default {
-    name: 'Postmodal',
+    name: 'PostModal',
     components:{
         CategorySel
     },
@@ -87,6 +87,7 @@
         width: 100%;
         background-color: rgba(0, 0, 0, 0.781);
         padding: 5rem;
+        z-index: 5;
 
     }
 
