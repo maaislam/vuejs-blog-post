@@ -4,6 +4,7 @@
     <AllPost></AllPost>
       <PostModal/>
       <AddCategoryModal/>
+      <EditPostModal/>
       
     
   </div>
@@ -14,7 +15,9 @@
   import AllPost from './components/AllPost';
   import AppHeader from './components/AppHeader';
   import PostModal from './components/PostModal';
-  import AddCategoryModal from './components/AddCategoryModal'
+  import AddCategoryModal from './components/AddCategoryModal';
+  import EditPostModal from './components/EditPostModal';
+
 
   export default {
     name: 'App',
@@ -22,7 +25,8 @@
     AllPost,
     AppHeader,
     PostModal,
-    AddCategoryModal
+    AddCategoryModal,
+    EditPostModal
     
   }
     

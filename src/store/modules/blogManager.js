@@ -15,8 +15,11 @@ const state = {
     },
     categoryModal:false,
     newCategory:'',
-    indexOfNewCat:null
+    indexOfNewCat:null,
     
+    //for editing posts
+    
+    openEditModal:false
 };
 
 
@@ -35,6 +38,9 @@ const getters = {
     getPosts:(state)=>{
         return state.allPost;
     },
+    
+    editModal:()=>{ return state.openEditModal;},
+
     getField
 
 
@@ -53,6 +59,7 @@ const mutations= {
         state.form.categories = [];
         state.form.body = '';
         state.addPostBtn = false;
+        state.openEditModal = false
     },
 
     newPostForm:(state, payload)=>{
@@ -68,7 +75,7 @@ const mutations= {
         if (payload){
            
            state.addPostBtn = false;
-           console.log(state.addPostBtn)
+           //console.log(state.addPostBtn)
         }
   
     },
@@ -103,7 +110,7 @@ const mutations= {
         if (payload){
             
         state.form.categories.splice(state.indexOfNewCat,0, state.newCategory)
-        console.log(state.form.categories)
+        //console.log(state.form.categories)
         state.categoryModal = false;
         state.newCategory = '';
         }
@@ -111,6 +118,31 @@ const mutations= {
         
     },
 
+    editPost:(state,id)=>{
+        
+       
+
+        const postToEdit = state.allPost.find(post=>post.id===id);
+
+        state.form.id = postToEdit.id
+        state.form.title = postToEdit.title
+        state.form.author = postToEdit.author
+        state.form.body = postToEdit.body
+        state.form.categories = postToEdit.category
+
+        state.openEditModal = true
+        console.log(state.form)
+    },
+
+    cancel:(state, payload) =>{
+
+        if(payload){
+        state.openEditModal = false
+
+        }
+    
+    },
+    
     updateField,
 
 };
@@ -139,7 +171,7 @@ const actions = {
         if (payload){
            
             const response = await axios.get('http://localhost:3000/posts');
-            console.log(response)
+            //console.log(response)
             context.commit('setAllPost', response.data)
           }
     },
@@ -159,13 +191,36 @@ const actions = {
               context.commit('resetState')
         }
     },
+    async update(context, payload){
+
+        if (payload){
+             await axios({
+                method: 'put',
+                url: `http://localhost:3000/posts/${state.form.id}`,
+                data: {
+                  author: state.form.author,
+                  title: state.form.title,
+                  category:state.form.categories,
+                  body: state.form.body,
+                }
+              });
+              context.commit('resetState')
+        }
+    },
 
     check:(context, payload)=>{
 
         context.commit('check', payload)
-    }
+    },
    
-  
+    editPost:(context,  id)=>{
+
+        context.commit('editPost', id)
+    },
+    cancel:(context,  payload)=>{
+
+        context.commit('editPost', payload)
+    }
     
 };
 

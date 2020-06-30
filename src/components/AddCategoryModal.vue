@@ -5,7 +5,7 @@
                 <h3>🤔Create New Category🤔</h3>
                 
                 <div class="field">
-                    <label >Add New Category</label>
+                    <label >Create New Category</label>
                     <input
                     v-model="newCategory"
                     
@@ -54,7 +54,7 @@
 
         .category__form{
 
-        position: absolute;;
+        position: fixed;
         top: 0;
         height: 100vh;
         width: 100%;

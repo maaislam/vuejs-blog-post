@@ -4,7 +4,7 @@
             Home
         </a>
         <a class="item">
-            Messages
+            Articles
         </a>
     </div>
 </template>
