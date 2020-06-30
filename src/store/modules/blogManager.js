@@ -131,18 +131,18 @@ const mutations= {
         state.form.categories = postToEdit.category
 
         state.openEditModal = true
-        console.log(state.form)
+        
     },
 
-    cancel:(state, payload) =>{
+    close:(state, payload) =>{
 
         if(payload){
-        state.openEditModal = false
-
+            state.openEditModal = false;
+            console.log(state.openEditModal)
         }
     
     },
-    
+
     updateField,
 
 };
@@ -217,9 +217,9 @@ const actions = {
 
         context.commit('editPost', id)
     },
-    cancel:(context,  payload)=>{
+    close:(context,  payload)=>{
 
-        context.commit('editPost', payload)
+        context.commit('close', payload)
     }
     
 };

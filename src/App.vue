@@ -1,7 +1,8 @@
 <template>
   <div>
     <AppHeader></AppHeader>
-    <AllPost></AllPost>
+    <router-view></router-view>
+    
       <PostModal/>
       <AddCategoryModal/>
       <EditPostModal/>
@@ -12,21 +13,23 @@
 
 <script>
 
-  import AllPost from './components/AllPost';
+  //import AllPost from './components/AllPost';
   import AppHeader from './components/AppHeader';
   import PostModal from './components/PostModal';
   import AddCategoryModal from './components/AddCategoryModal';
   import EditPostModal from './components/EditPostModal';
+ 
 
 
   export default {
     name: 'App',
   components:{
-    AllPost,
+   // AllPost,
     AppHeader,
     PostModal,
     AddCategoryModal,
-    EditPostModal
+    EditPostModal,
+    
     
   }
     

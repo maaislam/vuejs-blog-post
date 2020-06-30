@@ -1,11 +1,11 @@
 <template>
-    <div class="ui large menu">
-        <a class="active item">
+    <div class="ui huge menu">
+        <router-link to="/" class="active item">
             Home
-        </a>
-        <a class="item">
+        </router-link>
+        <router-link to="/posts" class="item">
             Articles
-        </a>
+        </router-link>
     </div>
 </template>
 

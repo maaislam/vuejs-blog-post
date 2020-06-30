@@ -1,18 +1,15 @@
 <template>
-    <div class="ui container">
+    <div class="ui container" @load="getAllPost">
         <div class="ui segment center aligned btn-container">
             <button 
                 class="ui primary button"
-                @click="newPostForm">Add Post
+                @click="newPostForm">Create New Post
             </button>
-            <button 
-                class="ui button"
-            >Add Category
-            </button>
+           
             <button 
                 class="ui button green"
                 @click="getAllPost"
-            >Show All Post
+            >View All Post
             </button>
         </div>
         <ul >
@@ -101,5 +98,8 @@
     }
     .post__tags{
         padding-left: 0 !important;
+    }
+    .btn-container{
+        margin-left: 2.5rem;
     }
 </style>

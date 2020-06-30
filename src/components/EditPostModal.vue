@@ -35,7 +35,7 @@
                 <button type="submit" class="ui primary button" @click="update">
                     Update
                 </button>
-                <button class="ui button" @click="cancel">
+                <button class="ui button" @click="close">
                     Cancel
                 </button>
             </div>
@@ -66,7 +66,7 @@
         },
     methods:{
             
-    ...mapActions(['cancel', 'update']),
+    ...mapActions(['close', 'update']),
            
            
     } 
