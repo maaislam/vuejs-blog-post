@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main">
         <h1>WELCOME TO MY DEMO BLOG POST!</h1>
         <hr>
         <h3>Tech Stack Used</h3>
