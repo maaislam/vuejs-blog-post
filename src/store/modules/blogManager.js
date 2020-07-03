@@ -2,8 +2,13 @@
 import axios from 'axios';
 import { getField, updateField } from 'vuex-map-fields';
 
-const state = {
 
+const url = {
+    demoServer:'https://testserver1990.herokuapp.com'
+};
+
+const state = {
+    
     addPostBtn: false,
     allPost:[],
     form:{
@@ -150,6 +155,8 @@ const mutations= {
 
 const actions = {
 
+   
+
     newPostForm:(context, payload)=>{
 
         context.commit('newPostForm', payload)
@@ -170,7 +177,7 @@ const actions = {
 
         if (payload){
            
-            const response = await axios.get('http://localhost:3000/posts');
+            const response = await axios.get(`${url.demoServer}/posts`);
             //console.log(response)
             context.commit('setAllPost', response.data)
           }
@@ -180,7 +187,7 @@ const actions = {
         if (payload){
              await axios({
                 method: 'post',
-                url: 'http://localhost:3000/posts',
+                url: `${url.demoServer}/posts`,
                 data: {
                   author: state.form.author,
                   title: state.form.title,
@@ -196,7 +203,7 @@ const actions = {
         if (payload){
              await axios({
                 method: 'put',
-                url: `http://localhost:3000/posts/${state.form.id}`,
+                url: `${url.demoServer}/posts/${state.form.id}`,
                 data: {
                   author: state.form.author,
                   title: state.form.title,
